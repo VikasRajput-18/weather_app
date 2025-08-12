@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import Header from "@/components/header";
 import { WeatherProvider } from "@/context/WeatherContext";
+import { NetworkProvider } from "@/context/NetworkContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +29,16 @@ export default function RootLayout({
   return (
     <ThemeProvider>
       <WeatherProvider>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <Header />
-            {children}
-          </body>
-        </html>
+        <NetworkProvider>
+          <html lang="en">
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              <Header />
+              {children}
+            </body>
+          </html>
+        </NetworkProvider>
       </WeatherProvider>
     </ThemeProvider>
   );

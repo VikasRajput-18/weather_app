@@ -6,10 +6,11 @@ import Card from "./card";
 import useDebounce from "@/hooks/useDebounce";
 import { WeatherData } from "@/type";
 import { useWeatherContext } from "@/context/WeatherContext";
+import { useNetwork } from "@/context/NetworkContext";
 
 const WeatherScreen = () => {
   const { addToHistory, search, setSearch } = useWeatherContext();
-
+  const { isOffline, retryFetch } = useNetwork();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const debouncedValue = useDebounce(search, 500);
@@ -27,17 +28,24 @@ const WeatherScreen = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_WEATHER_BASE_URL}?q=${debouncedValue}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=metric`
-      );
 
-      if (!response.ok) {
-        throw new Error("City not found");
-      }
+      await retryFetch(
+        async () => {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_WEATHER_BASE_URL}?q=${debouncedValue}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=metric`
+          );
 
-      const data: WeatherData = await response.json();
-      setCityWeatherData(data);
-      addToHistory(data.name);
+          if (!response.ok) {
+            throw new Error("City not found");
+          }
+
+          const data: WeatherData = await response.json();
+          setCityWeatherData(data);
+          addToHistory(data.name);
+        },
+        3,
+        2000
+      ); 
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
