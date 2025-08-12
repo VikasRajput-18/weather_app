@@ -8,7 +8,7 @@ import { WeatherData } from "@/type";
 import { useWeatherContext } from "@/context/WeatherContext";
 
 const WeatherScreen = () => {
-  const {  addToHistory , search , setSearch } = useWeatherContext();
+  const { addToHistory, search, setSearch } = useWeatherContext();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,7 +16,6 @@ const WeatherScreen = () => {
   const [cityWeatherData, setCityWeatherData] = useState<WeatherData | null>(
     null
   );
-
 
   const fetchWeatherData = async () => {
     if (!debouncedValue.trim()) {
@@ -55,10 +54,8 @@ const WeatherScreen = () => {
     fetchWeatherData();
   }, [debouncedValue]);
 
-  console.log(error);
-
   return (
-    <div className="col-span-12 md:col-span-8 lg:col-span-9">
+    <div className="col-span-12 md:col-span-8 lg:col-span-9 order-1 md:order-2">
       {/* Search Input */}
       <div className="relative bg-gray-200 dark:bg-[#293338] rounded-md ring-1 h-12">
         <Search className="absolute left-2 top-3 dark:stroke-white" />

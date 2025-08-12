@@ -4,7 +4,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <section className="min-h-screen w-full bg-white dark:bg-[#121417]">
+    <section className="min-h-screen w-full bg-white dark:bg-[#121417] pb-10">
       <div className="grid grid-cols-12 gap-4 pt-8 px-8 md:px-16">
         <SearchHistory />
         <WeatherScreen />

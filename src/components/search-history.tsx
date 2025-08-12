@@ -6,7 +6,7 @@ const SearchHistory = () => {
   const { history, setSearch } = useWeatherContext();
 
   return (
-    <div className="col-span-12 md:col-span-4 lg:col-span-3">
+    <div className="col-span-12 md:col-span-4 lg:col-span-3 order-2 md:order-1">
       <h3 className="text-2xl md:text-3xl font-bold dark:text-white text-[#293338]">
         Search History
       </h3>
