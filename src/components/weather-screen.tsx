@@ -32,7 +32,13 @@ const WeatherScreen = () => {
       await retryFetch(
         async () => {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_WEATHER_BASE_URL}?q=${debouncedValue}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=metric`
+            `${
+              process.env.NEXT_PUBLIC_WEATHER_BASE_URL ||
+              "https://api.openweathermap.org/data/2.5/weather"
+            }?q=${debouncedValue}&appid=${
+              process.env.NEXT_PUBLIC_WEATHER_API_KEY ||
+              "a6e828f08004844ec5cde51ba16b340a"
+            }&units=metric`
           );
 
           if (!response.ok) {
@@ -45,7 +51,7 @@ const WeatherScreen = () => {
         },
         3,
         2000
-      ); 
+      );
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
