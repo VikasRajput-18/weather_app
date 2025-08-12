@@ -8,7 +8,8 @@ import { WeatherData } from "@/type";
 import { useWeatherContext } from "@/context/WeatherContext";
 
 const WeatherScreen = () => {
-  const [search, setSearch] = useState("");
+  const {  addToHistory , search , setSearch } = useWeatherContext();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const debouncedValue = useDebounce(search, 500);
@@ -16,7 +17,6 @@ const WeatherScreen = () => {
     null
   );
 
-  const { history, addToHistory } = useWeatherContext();
 
   const fetchWeatherData = async () => {
     if (!debouncedValue.trim()) {

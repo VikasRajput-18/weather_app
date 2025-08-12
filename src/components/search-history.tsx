@@ -1,36 +1,33 @@
-import { SearchX } from "lucide-react";
+"use client";
+import { useWeatherContext } from "@/context/WeatherContext";
 import React from "react";
 
-const searches: string[] = ["India", "London", "USA", "Paris"];
-// const searches: string[] = [];
-
 const SearchHistory = () => {
+  const { history, setSearch } = useWeatherContext();
+
   return (
     <div className="col-span-12 md:col-span-4 lg:col-span-3">
       <h3 className="text-2xl md:text-3xl font-bold dark:text-white text-[#293338]">
         Search History
       </h3>
       <div className="mt-8">
-        {searches.length > 0 ? (
-          searches?.map((search, ind) => {
-            return (
-              <p
-                className="dark:text-white text-[#293338] font-semibold"
-                key={ind}
-              >
-                {ind + 1}. {search}
-              </p>
-            );
-          })
-        ) : (
-          <div className="flex items-center justify-between flex-col gap-2 mt-8">
-            <SearchX className="size-24 stroke-[#9EADB8]" />
-            <p className="text-center font-semibold dark:text-white text-[#293338]">
-              No recent searches
-            </p>
-            <p className="text-center dark:text-white text-[#9EADB8]">
-              Your search history will appear here.
-            </p>
+        {/* Search History */}
+        {history.length > 0 && (
+          <div className="mt-8">
+            <h3 className="dark:text-white text-[#293338] text-2xl font-semibold">
+              Recent Searches
+            </h3>
+            <ul className="mt-2 dark:text-[#9EADB8] text-neutral-600">
+              {history.map((city, index) => (
+                <li
+                  key={index}
+                  className="cursor-pointer hover:underline"
+                  onClick={() => setSearch(city)}
+                >
+                  {index + 1}) {city}
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
