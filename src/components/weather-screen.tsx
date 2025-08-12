@@ -28,7 +28,18 @@ const WeatherScreen = () => {
       </div>
 
       <div className="mt-8">
-        <h3>Outfit Recommendation</h3>
+        <h3 className="dark:text-white text-[#293338] text-2xl font-semibold">
+          Outfit Recommendation
+        </h3>
+
+        <div className="mt-4">
+          <p className="dark:text-white text-[#293338] font-semibold">
+            Wear a jacket
+          </p>
+          <p className="dark:text-[#9EADB8] text-neutral-600">
+            It&apos;s a bit chilly out there.
+          </p>
+        </div>
       </div>
     </div>
   );
