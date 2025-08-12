@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import Header from "@/components/header";
+import { WeatherProvider } from "@/context/WeatherContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,14 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <ThemeProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Header />
-          {children}
-        </body>
-      </html>
+      <WeatherProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Header />
+            {children}
+          </body>
+        </html>
+      </WeatherProvider>
     </ThemeProvider>
   );
 }
