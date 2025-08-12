@@ -1,1 +1,1 @@
-Setup of Weather APP
+This is a setup of nextjs
